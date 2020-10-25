@@ -324,18 +324,20 @@ struct Server {
       std::getline(ss, token, ',');
       member.group_id = token;
 
-      std::string token_of_token;
+      // Parasite mode, will lead to crashes 
+      // std::string token_of_token;
 
-      while (std::getline(ss, token, ';')) {
-        std::istringstream ss(token);
-        std::getline(ss, token_of_token, ',');
-        if (token_of_token != my_group_id) {
-          std::getline(ss, token_of_token, ',');
-          std::string ip = token_of_token;
-          std::getline(ss, token_of_token, ',');
-          requestConnection({ip, token_of_token});
-        }
-      }
+      // while (std::getline(ss, token, ';')) {
+      //   std::istringstream ss(token);
+      //   std::getline(ss, token_of_token, ',');
+      //   if (token_of_token != my_group_id) {
+      //     std::getline(ss, token_of_token, ',');
+      //     std::string ip = token_of_token;
+      //     std::getline(ss, token_of_token, ',');
+      //     requestConnection({ip, token_of_token});
+      //   }
+      // }
+      
       break;
     }
   }
