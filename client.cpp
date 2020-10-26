@@ -26,9 +26,23 @@
 #include <sstream>
 #include <thread>
 #include <map>
+#include <time.h> 
+
+
+// Get current date/time, format is YYYY-MM-DD.HH:mm:ss
+// Mostly from stackoverflow
+const std::string currentDateTime() {
+    time_t     now = time(0);
+    struct tm  tstruct;
+    char       buf[80];
+    tstruct = *localtime(&now);
+
+    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+
+    return buf;
+}
 
 // Threaded function for handling responss from server
-
 void listenServer(int serverSocket)
 {
     int nread;                                  // Bytes read from socket
@@ -46,11 +60,12 @@ void listenServer(int serverSocket)
        }
        else if(nread > 0)
        {
+          std::cout << currentDateTime() << ": ";
           printf("%s\n", buffer);
        }
-       printf("here\n");
     }
 }
+
 
 int main(int argc, char* argv[])
 {
